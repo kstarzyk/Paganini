@@ -71,10 +71,10 @@ class Paganini {
             if (passed) {
                 console.log(`    ${_desc}${pad(40 - _desc.length)}passed`);
                 return true;
-              } else {
+            } else {
                 console.log(`    ${_desc}${pad(40 - _desc.length)}failed: ${msg}`);
                 return false;
-              }
+            }
         }
     }
 }
