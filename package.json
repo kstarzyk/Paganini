@@ -1,0 +1,17 @@
+{
+  "name": "paganini",
+  "version": "1.0.0",
+  "description": "test framework",
+  "main": "index.js",
+  "scripts": {
+  "test": "node --harmony_destructuring --harmony_default_parameters examples/test.js",
+    "start": "node index.js",
+    "clean": "rm npm-debug.log",
+    "init": "alias paganini='npm run'&& echo paganini is now alias for node_modules/.bin/paganini"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "KS",
+  "license": "ISC"
+}
