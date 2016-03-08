@@ -1,9 +1,9 @@
 'use strict';
 
 const Paganini = require('../index');
-const Class = require('./class');
+const ExampleClass = require('./class');
 
-Paganini.opus(Class);
+Paganini.opus(ExampleClass);
 
 Paganini.concerto('Testing add function', () => {
     Paganini.capriccio('add', [2, 3], 5, '2 + 3 == 5');
