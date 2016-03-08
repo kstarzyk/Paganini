@@ -5,6 +5,7 @@ const assert = require('assert');
 function pad(len) {
     return Array(len).join(' ');
 }
+
 class Paganini {
     constructor() {
         console.log('Paganini, maestro!\n');
@@ -19,11 +20,25 @@ class Paganini {
         this.object = object;
     }
 
+    getDescription(desc, args) {
+        if (desc.split(' ').indexOf('$args') > -1) {
+            desc = desc.replace('$args', args.toString());
+        } else if(desc.match(new RegExp('\\$args\\[(.?)\\]')) != null) {
+            const reg = new RegExp('\\$args\\[(.?)\\]', 'g');
+            let match = reg.exec(desc);
+            while (match != null) {
+                desc = desc.replace(match[0], args[match[1]]);
+                match = reg.exec(desc);
+            }
+        }
+
+        return desc;
+    }
+
     non() {
         let arr = Object.keys(arguments).map((k) => arguments[k]);
-        if (arr.length == 3) {
+        if (arr.length == 3)
             arr.push(0);
-        }
         arr.push(true);
         return this.test(...arr);
     }
@@ -37,30 +52,13 @@ class Paganini {
 
     test(fn, args, result, _desc=0, rev=false) {
         let testFunc = 'equal';
-        let desc = '';
-        if (_desc === 0) {
-            desc = `${fn} ${args} ${!rev ? '' : 'not'} results ${result}`;
-        } else {
-            if (_desc.split(' ').indexOf('$args') > -1) {
-                desc = _desc.replace('$args', args.toString());
-            } else if(_desc.match(new RegExp('\\$args\\[(.?)\\]')) != null) {
-                const reg = new RegExp('\\$args\\[(.?)\\]', 'g');
-                let match = reg.exec(_desc);
-                while (match != null) {
+        if (_desc === 0)
+            _desc = `${fn} ${args} ${!rev ? '' : 'not'} results ${result}`;
+        else
+            _desc = this.getDescription(_desc, args);
 
-                    _desc = _desc.replace(match[0], args[match[1]]);
-                    match = reg.exec(_desc);
-                }
-                desc = _desc;
-            } else {
-                desc = _desc;
-            }
-        }
-
-        if (typeof(result) == 'object') {
+        if (typeof(result) == 'object')
             testFunc = 'deepEqual';
-        }
-
 
         let passed = !rev;
         let msg = '';
@@ -71,10 +69,10 @@ class Paganini {
             passed = rev;
         } finally {
             if (passed) {
-                console.log(`    ${desc}${pad(40 - desc.length)}passed`);
+                console.log(`    ${_desc}${pad(40 - _desc.length)}passed`);
                 return true;
               } else {
-                console.log(`    ${desc}${pad(40 - desc.length)}failed: ${msg}`);
+                console.log(`    ${_desc}${pad(40 - _desc.length)}failed: ${msg}`);
                 return false;
               }
         }
