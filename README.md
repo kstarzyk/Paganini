@@ -17,7 +17,7 @@ const ExampleClass = require('./class');
 
 Paganini.opus(ExampleClass);
 
-Paganini.concerto('Testing add method from ExampleClass', () => {
+Paganini.concerto('Testing ExampleClass', () => {
     Paganini.capriccio('add', [2, 3], 5, '2 + 3 == 5');                    // success
     Paganini.capriccio('add', [2, 3], 4);                                  // fail
     Paganini.capriccio.non('add', [2, 3], 4);                              // success
