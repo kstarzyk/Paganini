@@ -5,7 +5,7 @@ const ExampleClass = require('./class');
 
 Paganini.opus(ExampleClass);
 
-Paganini.concerto('Testing add function', () => {
+Paganini.concerto('Testing ExampleClass', () => {
     Paganini.capriccio('add', [2, 3], 5, '2 + 3 == 5');
     Paganini.capriccio('add', [2, 3], 4);
     Paganini.capriccio.non('add', [2, 3], 4);
