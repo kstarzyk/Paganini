@@ -25,3 +25,12 @@ Paganini.concerto('Testing ExampleClass', () => {
                        'zip $args[0] and $args[1] to one list');
 });
 ```
+
+## Documentation
+
+#### Paganini.opus(class | module | function)
+
+#### Paganini.concerto(description, callback)
+
+#### Paganini.cappriccio(methodName, arguments, expectedResult[,description])
+
